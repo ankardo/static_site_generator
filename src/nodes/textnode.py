@@ -1,6 +1,4 @@
-
-
-from htmlnode import LeafNode
+from nodes.htmlnode import LeafNode
 
 text_type_text = "text"
 text_type_bold = "bold"
@@ -47,7 +45,3 @@ def text_node_to_html_node(text_node):
     if text_node.text_type == text_type_image:
         return LeafNode("img", "", {"src": text_node.url, "alt": text_node.text})
     raise ValueError(f"Invalid text type: {text_node.text_type}")
-
-
-def split_node_delimiter(node, delimiter, type):
-    return [TextNode("This is plain text", text_type_text)]
