@@ -57,7 +57,7 @@ class TestSplitNodes(unittest.TestCase):
             # Test case for no delimiter
             {
                 "input_node": TextNode("This is plain text", text_type_text),
-                "delimiter": "**",  # using **, which won't match
+                "delimiter": "**",
                 "expected": [TextNode("This is plain text", text_type_text)]
             },
             # Test case for no closing delimiter
@@ -73,7 +73,7 @@ class TestSplitNodes(unittest.TestCase):
             if "expected_exception" in case:
                 with self.assertRaises(case["expected_exception"]):
                     split_nodes_delimiter(
-                        [case["input_node"]], case["delimiter"], text_type_italic)
+                        [case["input_node"]], case["delimiter"], text_type_bold)
             else:
                 result = split_nodes_delimiter(
                     [case["input_node"]], case["delimiter"], get_node_type(case["delimiter"]))
