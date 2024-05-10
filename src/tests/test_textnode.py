@@ -12,8 +12,10 @@ from nodes.textnode import (
 
 
 class TestTextNode(unittest.TestCase):
-    def setUp(self):
-        self.test_eq_cases = [
+
+    def test_eq(self):
+
+        test_cases = [
 
             (TextNode("This is a text node", text_type_text),
              TextNode("This is a text node", text_type_text),
@@ -39,33 +41,36 @@ class TestTextNode(unittest.TestCase):
              TextNode("This is a link node", text_type_link),
              self.assertEqual),
 
+            # Same Url Test case
             (TextNode("This is a text node", text_type_text,
                       "https://www.ex.com"),
              TextNode("This is a text node", text_type_text,
                       "https://www.ex.com"),
              self.assertEqual),
 
+            # None Url Test case
             (TextNode("This is a text node", text_type_bold),
              TextNode("This is a text node", text_type_bold, None),
              self.assertEqual),
 
+            # Non equal text Test case
             (TextNode("This is a text node", text_type_bold),
              TextNode("Another text node", text_type_bold),
              self.assertNotEqual),
 
+            # Non equal text type Test case
             (TextNode("This is a text node", text_type_bold),
-             TextNode("This is a text node", "italic"),
+             TextNode("This is a text node", text_type_italic),
              self.assertNotEqual),
 
+            # Non equal Url Test case
             (TextNode("This is a text node",
                       text_type_bold, "https://www.ex.com"),
              TextNode("This is a text node",
                       text_type_bold, "https://www.aex.com"),
              self.assertNotEqual),
         ]
-
-    def test_eq(self):
-        for first_node, second_node, assertion_method in self.test_eq_cases:
+        for first_node, second_node, assertion_method in test_cases:
             with self.subTest(first_node=first_node, second_node=second_node):
                 assertion_method(first_node, second_node)
 

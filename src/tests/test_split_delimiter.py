@@ -26,7 +26,8 @@ class TestSplitNodes(unittest.TestCase):
         self.test_cases = [
             # Test case for bold delimiter
             {
-                "input_node": TextNode("This is text with a **bolded** word", text_type_text),
+                "input_node": TextNode("This is text with a **bolded** word",
+                                       text_type_text),
                 "delimiter": "**",
                 "expected": [
                     TextNode("This is text with a ", text_type_text),
@@ -36,7 +37,8 @@ class TestSplitNodes(unittest.TestCase):
             },
             # Test case for italic delimiter
             {
-                "input_node": TextNode("This is text with a *italic* word", text_type_text),
+                "input_node": TextNode("This is text with a *italic* word",
+                                       text_type_text),
                 "delimiter": "*",
                 "expected": [
                     TextNode("This is text with a ", text_type_text),
@@ -46,7 +48,8 @@ class TestSplitNodes(unittest.TestCase):
             },
             # Test case for code delimiter
             {
-                "input_node": TextNode("This is text with a `code block` word", text_type_text),
+                "input_node": TextNode("This is text with a `code block` word",
+                                       text_type_text),
                 "delimiter": "`",
                 "expected": [
                     TextNode("This is text with a ", text_type_text),
@@ -62,7 +65,8 @@ class TestSplitNodes(unittest.TestCase):
             },
             # Test case for no closing delimiter
             {
-                "input_node": TextNode("** This should be plain text", text_type_text),
+                "input_node": TextNode("** This should be plain text",
+                                       text_type_text),
                 "delimiter": "**",
                 "expected_exception": ValueError
             }
@@ -73,10 +77,14 @@ class TestSplitNodes(unittest.TestCase):
             if "expected_exception" in case:
                 with self.assertRaises(case["expected_exception"]):
                     split_nodes_delimiter(
-                        [case["input_node"]], case["delimiter"], text_type_bold)
+                        [case["input_node"]], case["delimiter"],
+                        text_type_bold
+                    )
             else:
                 result = split_nodes_delimiter(
-                    [case["input_node"]], case["delimiter"], get_node_type(case["delimiter"]))
+                    [case["input_node"]], case["delimiter"],
+                    get_node_type(case["delimiter"])
+                )
                 self.assertEqual(result, case["expected"])
 
     if __name__ == "__main__":
